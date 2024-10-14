@@ -1,9 +1,9 @@
-package teamcity.api.requests.checked;
+package teamcity.api.requests;
 
 import teamcity.api.enums.Endpoint;
 import teamcity.api.models.BaseModel;
-import teamcity.api.requests.checked.CheckedBase;
 import io.restassured.specification.RequestSpecification;
+import teamcity.api.requests.checked.CheckedBase;
 
 import java.util.EnumMap;
 

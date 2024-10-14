@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends BaseModel {
     private String id;
-    @Random
-    private String username;
-    @Random
-    private String password;
+//    @Random
+    private String username = "admin";
+//    @Random
+    private String password = "admin";
     private Roles roles;
 }
 

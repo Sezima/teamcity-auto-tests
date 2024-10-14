@@ -4,9 +4,11 @@ import teamcity.api.annotations.Optional;
 import teamcity.api.annotations.Parameterizable;
 import teamcity.api.annotations.Random;
 import teamcity.api.models.BaseModel;
+import teamcity.api.models.TestData;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +17,8 @@ public final class TestDataGenerator {
 
     private TestDataGenerator() {
     }
+
+
 
     /**
      * Основной метод генерации тестовых данных.
@@ -41,6 +45,10 @@ public final class TestDataGenerator {
      * параметром generatedModels при генерации BuildType, он будет переиспользоваться при установке
      * поля NewProjectDescription project, вместо генерации нового.
      */
+
+
+
+
     public static <T extends BaseModel> T generate(List<BaseModel> generatedModels, Class<T> generatorClass,
                                                    Object... parameters) {
         try {
@@ -81,5 +89,29 @@ public final class TestDataGenerator {
         }
     }
 
+
+    public static TestData generate() {
+        // Идем по всем полям TestData и для каждого, кто наследник BaseModel вызывыем generate() c передачей уже сгенерированных сущностей
+        try {
+            var instance = TestData.class.getDeclaredConstructor().newInstance();
+            var generatedModels = new ArrayList<BaseModel>();
+            for (var field: TestData.class.getDeclaredFields()) {
+                field.setAccessible(true);
+                if (BaseModel.class.isAssignableFrom(field.getType())) {
+                    var generatedModel = generate(generatedModels, field.getType().asSubclass(BaseModel.class));
+                    field.set(instance, generatedModel);
+                    generatedModels.add(generatedModel);
+                }
+                field.setAccessible(false);
+            }
+            return instance;
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new IllegalStateException("Cannot generate test data", e);
+        }
+    }
+
+    public static <T extends BaseModel> T generate(Class<T> generatorClass, Object... parameters){
+        return generate(Collections.emptyList(), generatorClass, parameters);
+    }
 
 }

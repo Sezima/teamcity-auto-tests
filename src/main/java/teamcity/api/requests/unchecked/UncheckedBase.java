@@ -1,5 +1,7 @@
 package teamcity.api.requests.unchecked;
 
+
+
 import teamcity.api.enums.Endpoint;
 import teamcity.api.models.BaseModel;
 import teamcity.api.requests.CrudInterface;
@@ -10,11 +12,8 @@ import io.restassured.specification.RequestSpecification;
 
 public class UncheckedBase extends Request implements CrudInterface {
 
-    private RequestSpecification spec;
-
     public UncheckedBase(RequestSpecification spec, Endpoint endpoint) {
         super(spec, endpoint);
-        this.spec = spec;
     }
 
     @Override
