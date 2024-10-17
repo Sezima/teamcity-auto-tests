@@ -3,19 +3,11 @@ package teamcity.api;
 import org.apache.hc.core5.http.HttpStatus;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
-import teamcity.api.enums.Endpoint;
 import teamcity.api.models.BuildType;
 import teamcity.api.models.Project;
-import teamcity.api.models.TestData;
-import teamcity.api.models.User;
 import teamcity.api.requests.CheckedRequests;
-import teamcity.api.requests.checked.CheckedBase;
 import teamcity.api.requests.unchecked.UncheckedBase;
 import teamcity.api.spec.Specifications;
-
-import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReference;
-
 import static io.qameta.allure.Allure.step;
 import static teamcity.api.enums.Endpoint.*;
 import static teamcity.api.generator.TestDataGenerator.generate;

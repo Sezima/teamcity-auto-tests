@@ -9,15 +9,28 @@
     <version>1.0-SNAPSHOT</version>
     <name>demo</name>
 
+<!--    <properties>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--        <maven.compiler.target>22</maven.compiler.target>-->
+<!--        <maven.compiler.source>22</maven.compiler.source>-->
+<!--        <aspectj.version>1.9.22</aspectj.version>-->
+<!--        <allure.version>2.27.0</allure.version>-->
+<!--        <rest-assured.version>5.1.1</rest-assured.version>-->
+<!--        <lombok.version>1.18.30</lombok.version>-->
+<!--        <jackson.version>2.15.0</jackson.version>-->
+<!--        <junit.version>5.9.3</junit.version>-->
+<!--    </properties>-->
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>22</maven.compiler.target>
-        <maven.compiler.source>22</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
         <aspectj.version>1.9.22</aspectj.version>
         <allure.version>2.27.0</allure.version>
         <rest-assured.version>5.1.1</rest-assured.version>
         <lombok.version>1.18.30</lombok.version>
         <jackson.version>2.15.0</jackson.version>
+        <junit.version>5.8.1</junit.version>
     </properties>
 
     <dependencies>
@@ -31,6 +44,25 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+
+
+
+
+
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version> <!-- Убедитесь, что версия актуальна -->
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
 
 
 
@@ -120,4 +152,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

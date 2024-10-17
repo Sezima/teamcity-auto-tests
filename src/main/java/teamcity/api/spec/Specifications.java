@@ -32,7 +32,8 @@ public class Specifications {
 
     public static RequestSpecification authSpec(User user) {
         var requestBuilder = reqBuilder();
-        requestBuilder.setBaseUri("http://%s:%s@%s".formatted(user.getUsername(), user.getPassword(), Config.getProperty("host")));
+        String som = "192.168.0.105:8111";
+        requestBuilder.setBaseUri("http://%s:%s@%s".formatted(user.getUsername(), user.getPassword(), som));
         return requestBuilder.build();
     }
 

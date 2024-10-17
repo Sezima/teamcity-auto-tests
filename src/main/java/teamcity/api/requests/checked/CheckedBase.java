@@ -1,6 +1,7 @@
 package teamcity.api.requests.checked;
 
 
+import io.restassured.response.Response;
 import teamcity.api.enums.Endpoint;
 import teamcity.api.models.BaseModel;
 import teamcity.api.requests.CrudInterface;
@@ -18,13 +19,22 @@ public final class CheckedBase<T extends BaseModel> extends Request implements C
         this.uncheckedBase = new UncheckedBase(spec, endpoint);
     }
 
+//    @Override
+//    public T create(BaseModel model) {
+//        return (T) uncheckedBase
+//                .create(model)
+//                .then().assertThat().statusCode(HttpStatus.SC_OK)
+//                .extract().as(endpoint.getModelClass());
+//    }
+
     @Override
-    public T create(BaseModel model) {
-        return (T) uncheckedBase
+    public Response create(BaseModel model) {
+        return uncheckedBase
                 .create(model)
-                .then().assertThat().statusCode(HttpStatus.SC_OK)
-                .extract().as(endpoint.getModelClass());
+                .then() // Цепочка для проверки и извлечения
+                .extract().response(); // Извлекаем Response через ValidatableResponse
     }
+
 
     @Override
     public T read(String id) {
@@ -46,7 +56,9 @@ public final class CheckedBase<T extends BaseModel> extends Request implements C
     public Object delete(String id) {
         return uncheckedBase
                 .delete(id)
-                .then().assertThat().statusCode(HttpStatus.SC_OK)
+                .then() // Цепочка для проверки
+                .assertThat().statusCode(HttpStatus.SC_NO_CONTENT) // Проверка кода 204
                 .extract().asString();
     }
+
 }

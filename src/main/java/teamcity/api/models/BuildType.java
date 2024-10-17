@@ -14,4 +14,15 @@ public class BuildType extends BaseModel {
     private String name;
     private Project project;
     private Steps steps;
+    private String status; // Добавляем поле для статуса
+
+    // Метод для получения статуса
+    public String getStatus() {
+        return status;
+    }
+
+    // Метод для установки статуса
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
